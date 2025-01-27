@@ -1,6 +1,6 @@
 import streamlit as st
 import gspread
-from google.oauth2.service_account import Credentials
+from utils.google_sheets import get_credentials_from_secrets
 import bcrypt
 
 def manage_users():
@@ -31,7 +31,7 @@ def manage_users():
 
             try:
                 # Conectar con Google Sheets
-                creds = Credentials.from_service_account_file("credenciales.json", scopes=["https://www.googleapis.com/auth/spreadsheets"])
+                creds = get_credentials_from_secrets()
                 client = gspread.authorize(creds)
                 sheet = client.open_by_url("https://docs.google.com/spreadsheets/d/1qZX98WUaUGyUL5xSP0lHb7K7MfH7_ny8bRGOZnU1gGc/edit#gid=0")
                 worksheet = sheet.worksheet("Usuarios")
@@ -49,7 +49,7 @@ def manage_users():
     # Mostrar usuarios existentes en la hoja
     st.subheader("Usuarios Registrados")
     try:
-        creds = Credentials.from_service_account_file("credenciales.json", scopes=["https://www.googleapis.com/auth/spreadsheets"])
+        creds = get_credentials_from_secrets()
         client = gspread.authorize(creds)
         sheet = client.open_by_url("https://docs.google.com/spreadsheets/d/1qZX98WUaUGyUL5xSP0lHb7K7MfH7_ny8bRGOZnU1gGc/edit#gid=0")
         worksheet = sheet.worksheet("Usuarios")
