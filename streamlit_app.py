@@ -47,3 +47,5 @@ elif st.session_state["page"] == "Usuarios":
     manage_users()
 elif st.session_state["page"] == "Seguimiento":
     seguimiento_tramites()
+
+st.write("Versión actual de la aplicación: v1.0.1")  # Cambia este número al subir cada commit
